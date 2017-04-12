@@ -258,7 +258,7 @@ INSERT INTO [tableName] (colName1, colName2) VALUES (val1, val2),(val1, val3) ON
 ### 索引或约束
 
 增加索引
-````
+```` sql
 # 增加主键
 ALTER TABLE [tableName] ADD PRIMARY KEY (colName);
 # 唯一键约束
@@ -273,12 +273,12 @@ ALTER TABLE [tableName] ADD FULLTEXT (colName);
 ````
 
 删除索引/约束
-````
+```` sql
 ALTER TABLE [tableName] DROP INDEX [unx_name];
 ````
 
 修改索引/约束
-````
+```` sql
 ALTER TABLE [tableName] DROP INDEX [unx_name];
 ALTER TABLE	[tableName] ADD UNIQUE KEY [unx_name] (colName1, colName2);
 ````
@@ -402,6 +402,27 @@ Innodb存储引擎支持两种常见的索引: B+树索引、Hash索引
 > NOT ([field] <=> NULL)  ===>  [field] IS NOT NULL
 
 ## mysql分区表
+案例
+``` sql
+CREATE TABLE `t_login` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `savetime` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '数据写入时间',
+  PRIMARY KEY (`id`,`savetime`)
+) ENGINE=INNODB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='角色登录日志表'
+PARTITION BY LIST (month(savetime))
+(PARTITION p1 VALUES IN (1),
+ PARTITION p2 VALUES IN (2),
+ PARTITION p3 VALUES IN (3),
+ PARTITION p4 VALUES IN (4),
+ PARTITION p5 VALUES IN (5),
+ PARTITION p6 VALUES IN (6),
+ PARTITION p7 VALUES IN (7),
+ PARTITION p8 VALUES IN (8),
+ PARTITION p9 VALUES IN (9),
+ PARTITION p10 VALUES IN (10),
+ PARTITION p11 VALUES IN (11),
+ PARTITION p12 VALUES IN (12));
+```
 
 `PARTITION`类型: 水平分区和垂直分区
 
@@ -427,11 +448,3 @@ ON u.id=f.user AND f.friend=? AND f.user<>?
 ORDER BY create_time DESC;
 
 ````
-
-### 2.数据量过大的表，部分数据单独建表
-
-### 3.添加冗余字段，减少大表联合查询
-
-### 4.索引优化
-
-### 5.关注数据库状态
