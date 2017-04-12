@@ -34,3 +34,5 @@ DROP PROCEDURE IF EXISTS `proc_if`;
 ``` mysql
 call proc_if(1);
 ```
+
+### 使用场合

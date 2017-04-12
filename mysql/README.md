@@ -1,5 +1,7 @@
 # Mysql 寻踪
 > 目录
+
+* [简介](https://github.com/zhengjinwei123/MDB/blob/master/mysql/desc.md)
 * [索引](https://github.com/zhengjinwei123/MDB/blob/master/mysql/key.md)
 * [存储过程](https://github.com/zhengjinwei123/MDB/blob/master/mysql/procedure.md)
 * [事务](https://github.com/zhengjinwei123/MDB/blob/master/mysql/transaction.md)
