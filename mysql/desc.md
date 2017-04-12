@@ -214,6 +214,13 @@ innodb_file_per_table=1				//每张表一个文件，不建议使用
 innodb_file_format=Barracuda
 ````
 
+或者在创建表的时候直接指定:
+``` sql
+CREATE TABLE IF NOT EXISTS `stu` (
+  ...
+) ENGINE=InnoDB ROW_FORMAT=COMPRESSED KEY_BLOCK_SIZE=8 DEFAULT CHARSET=latin1;
+```
+
 修改当前运行数据库变量
 ````mysql
 SET GLOBAL innodb_file_format=Barracuda;		//row的COMPRESSED模式，依赖这个配置。Barracuda
