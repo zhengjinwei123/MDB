@@ -21,7 +21,6 @@ redis-server redis.conf &
 ```
 cd /data/redis/
 redis-cli
-
 ```
 
 ## 3、配置
