@@ -82,6 +82,32 @@ GRANT [privilege] ON [dbName].[tableName] '[user]'@'[ip]' IDENTIFIED BY "[passwo
 GRANT ALL PRIVILEGES ON *.* TO 'zbgame'@'%' IDENTIFIED BY "zbgame@2016"  WITH GRANT OPTION;
 FLUSH PRIVILEGES;
 ````
+例子:
+```
+1、打开mysql.exe(MySQL Command Line Client)，输入密码
+
+2、输入：use mysql;
+
+3、查询host输入： select user,host from user;
+
+4、创建host（如果有"%"这个host值，则跳过这一步）
+
+如果没有"%"这个host值,就执行下面这两句:
+mysql> update user set host='%' where user='root';
+mysql> flush privileges;
+
+5、授权用户
+
+（1）任意主机以用户root和密码pwd连接到mysql服务器
+
+mysql> GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'pwd' WITH GRANT OPTION;
+mysql> flush privileges;
+
+（2）指定IP为（如192.168.1.100）的主机以用户tuser和密码tpwd连接到mysql服务器
+
+mysql> GRANT ALL PRIVILEGES ON *.* TO 'tuser'@'192.168.1.100' IDENTIFIED BY 'tpwd' WITH GRANT OPTION; 
+mysql> flush privileges;
+```
 
 ##### 也可以通过修改表来操作
 
