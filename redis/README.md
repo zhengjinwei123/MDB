@@ -28,8 +28,8 @@ redis-cli
 修改/etc/redis.conf文件
 
 ````
-# 绑定ip地址
-bind 127.0.0.1
+# 绑定ip地址,可以绑定多个地址
+bind 127.0.0.1 192.168.2.150
 # 指定不同的 pid 文件和端口
 pidfile /var/run/redis.pid
 # 指定监听端口
@@ -57,3 +57,16 @@ slaveof <masterip> <masterport>
 # 指定与主数据库连接时需要的密码验证
 masterauth <master-password>
 ````
+
+## 4.外部不能访问的问题
+```
+1. 防火墙端口没有打开
+centos7 下：
+查看：firewall-cmd --list-all
+添加：firewall-cmd --zone=public --add-port=6379/tcp --permanent
+重载：firewall-cmd --reload
+
+2. redis.conf 监听的地址不对
+需要添加或修改:
+bind 127.0.0.1   192.168.2.150
+```
