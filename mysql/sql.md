@@ -5,16 +5,8 @@
 
 ``` sql
 假设有一张表:
--- ----------------------------
--- 充值上报表 -- 服务端
--- ----------------------------
-CREATE TABLE IF NOT EXISTS `t_post_pay` (
+CREATE TABLE IF NOT EXISTS `t_pay` (
     `id` bigint(20) NOT NULL AUTO_INCREMENT,
-    `areaid` int(4) NOT NULL DEFAULT '0' COMMENT '所属区',
-    `groupid` int(10) NOT NULL DEFAULT '0' COMMENT '所属组',
-    `channel` int(8) NOT NULL DEFAULT '0' COMMENT ' 渠道',
-    `account` varchar(64) NOT NULL DEFAULT '' COMMENT '渠道账号',
-    `roleid` bigint(20) NOT NULL DEFAULT '0' COMMENT '角色',
     `level` int(11) NOT NULL DEFAULT '0' COMMENT '角色等级',
     `fee` decimal(18,2) NOT NULL DEFAULT '0.00' COMMENT '付费金额',
     `currency` int(3) NOT NULL DEFAULT '0' COMMENT '货币类型',
@@ -44,5 +36,5 @@ PARTITION BY LIST ( MONTH(`savetime`) )
 
 我们将这张表的每条数据的savetime 更新为 time所在时间戳指定的时间格式:
 
-UPDATE (SELECT id,savetime,LEVEL,TIME FROM t_post_pay) A  LEFT JOIN t_post_pay B ON A.id=B.id SET B.savetime=FROM_UNIXTIME(A.time)
+UPDATE (SELECT id,savetime,LEVEL,TIME FROM t_pay) A  LEFT JOIN t_pay B ON A.id=B.id SET B.savetime=FROM_UNIXTIME(A.time)
 ```
