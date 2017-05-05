@@ -41,6 +41,65 @@
   
 ```
 
+### 案例
+
+``` sql
+
+1.例子1
+\d $$
+create procedure p1();
+begin
+	select count(*) from mysql.user;
+end$$
+
+\d;
+call p1();
+
+
+2.例子2
+create table t1(
+	id int,
+	cc varchar(100)
+);
+delimiter $$
+create procedure autoinsert1()
+begin
+	declare i int default 1;
+	while(i <= 20000) do
+		insert into school.t1 values(i,md5(i));
+		set i=i+1;
+	end while;
+end $$
+
+delimiter ;
+
+call autoinsert1()
+
+3.例子3
+create procedure autoinsert2(IN a int)
+begin
+	declare i int default 1;
+	while(i<=a) do
+		insert into school.t1 values(i,md5(i));
+		set i=i+1;
+	end while;
+end $$
+
+set @num=10;
+call autoinsert2(@num);
+
+4.例子4
+delimiter $$
+create procedure p2(OUT param1 INT)
+begin	
+	select count(*) into param1 from mysql.user;
+end$$
+
+delimiter ;
+call p2(@a);
+select @a;
+```
+
 1. 创建一个存储过程
 ``` mysql
 DELIMITER ;;
