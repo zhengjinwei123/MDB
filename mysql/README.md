@@ -11,3 +11,5 @@
 * [查询优化](https://github.com/zhengjinwei123/MDB/blob/master/mysql/optimize.md)
 * [管理](https://github.com/zhengjinwei123/MDB/blob/master/mysql/manages.md)
 * [SQL 常用脚本](https://github.com/zhengjinwei123/MDB/blob/master/mysql/sql.md)
+* [外键](https://github.com/zhengjinwei123/MDB/blob/master/mysql/foreign-key.md)
+* [触发器](https://github.com/zhengjinwei123/MDB/blob/master/mysql/trigger.md)
