@@ -90,7 +90,6 @@ CREATE TABLE `xiaodi` (
 	KEY `dage_id` (`dage_id`),
 	CONSTRAINT `xiaodi_ibfk_1` FOREIGN KEY (`dage_id`) REFERENCE `dage` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-```
 
 插入一个大哥：
 insert into dage(name) values('大哥1')
@@ -127,3 +126,5 @@ mysql> select * from dage;
 Empty set (0.01 sec)
 mysql> select * from xiaodi;
 Empty set (0.00 sec)
+
+```
