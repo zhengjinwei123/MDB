@@ -44,3 +44,18 @@ cd bin
 10.后台权限启动
 ./mongod -dbpath=/usr/local/mongodb/data -logpath=/usr/local/mongodb/logs --fork --auth
 ```
+
+
+## 创建用户
+
+> mongodb 默认是没有用户的，如果服务需要权限的话，需要在无权限启动情况下创建用户
+
+```
+1. 无权限启动服务     ./mongod -dbpath=/usr/local/mongodb/data -logpath=/usr/local/mongodb/logs --fork
+2. 创建用户 
+use admin
+db.createUser({user:"root",pwd:"root",roles:[{role:"readWrite",db:"admin"}]})
+3. 关闭服务
+4. 重启服务，加上权限启动项 --auth   ./mongod -dbpath=/usr/local/mongodb/data -logpath=/usr/local/mongodb/logs --fork --auth
+5. 重新登录,执行   db.auth("root","root")
+```
