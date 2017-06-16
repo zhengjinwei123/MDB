@@ -54,14 +54,19 @@ cd bin
 1. 无权限启动服务     ./mongod -dbpath=/usr/local/mongodb/data -logpath=/usr/local/mongodb/logs --fork
 2. 创建用户 
 use admin
-db.createUser( { "user" : "root",
-                 "pwd": "root",
-                 "roles" : [ { role: "clusterAdmin", db: "admin" },
-                             { role: "readAnyDatabase", db: "admin" },
-                             "readWrite"
-                             ] },
-               { w: "majority" , wtimeout: 5000 } )
+db.createUser({ 
+  "user" : "root",
+  "pwd": "root",
+"roles" : [ 
+  { role: "clusterAdmin", db: "admin" },
+  { role: "readAnyDatabase", db: "admin" },
+   "readWrite"
+]},
+  { w: "majority" , wtimeout: 5000 } )
 3. 关闭服务
-4. 重启服务，加上权限启动项 --auth   ./mongod -dbpath=/usr/local/mongodb/data -logpath=/usr/local/mongodb/logs --fork --auth
+4. 重启服务，加上权限启动项 --auth   
+./mongod -dbpath=/usr/local/mongodb/data -logpath=/usr/local/mongodb/logs --fork --auth
 5. 重新登录,执行   db.auth("root","root")
 ```
+### mongoose 库
+[mongoose](http://mongoosejs.com/docs/guide.html)
