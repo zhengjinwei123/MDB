@@ -38,3 +38,60 @@ PARTITION BY LIST ( MONTH(`savetime`) )
 
 UPDATE (SELECT id,savetime,LEVEL,TIME FROM t_pay) A  LEFT JOIN t_pay B ON A.id=B.id SET B.savetime=FROM_UNIXTIME(A.time)
 ```
+
+### 2. 不存在插入，存在则更新
+> `DUPLICATE KEY UPDATE` 是mysql特有语法
+
+``` sql
+INSERT INTO t_pay (`level`,`fee`) VALUES (1,30),(2,70) ON DUPLICATE KEY UPDATE level = VALUES(`level`);
+```
+
+### 3. 差集，交集，并集
+
+##### 1. 并集
+
+``` sql
+select table_a.`id` as id,table_b.`fee` as fee from (
+	select * from table_a 
+	union all
+	select * from table_b
+) temp where id>1;
+```
+
+##### 2. 差集
+
+``` sql
+SELECT ID FROM (  
+     SELECT DISTINCT A.ID AS ID FROM TABLEA A  #有ID： 1 2 3 4 5  
+     UNION ALL  
+     SELECT DISTINCT B.ID AS ID FROM TABLEB B  #有ID： 2 3  
+)TEMP GROUP BY ID HAVING COUNT(ID) = 1;
+```
+
+##### 3. 交集
+
+``` sql
+SELECT ID FROM (  
+     SELECT DISTINCT A.ID AS ID FROM TABLEA A  #有ID： 1 2 3 4 5  
+     UNION ALL  
+     SELECT DISTINCT B.ID AS ID FROM TABLEB B  #有ID： 2 3  
+)TEMP GROUP BY ID HAVING COUNT(ID) = 2;
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
