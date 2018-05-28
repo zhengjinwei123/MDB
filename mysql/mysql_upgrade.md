@@ -100,3 +100,43 @@ mysql> select version();
 1 row in set (0.00 sec)
 
 ```
+
+# Mysql 使用 RPM 包升级
+> 为了保证软件升级后所使用的软件包的一致性，没有遗漏问题，使用RPM 包安装比较安全
+
+#### mysql 升级步骤
+1.  执行   rpm -qa | grep -i mysql   列出之前安装的mysql组件
+如：
+
+```
+[root@localhost mysql]# rpm -qa | grep -i mysql
+MySQL-client-5.6.29-1.linux_glibc2.5.x86_64
+php-mysqlnd-5.6.31-1.el7.remi.x86_64
+php-ZendFramework-Db-Adapter-Pdo-Mysql-1.12.17-1.el7.centos7.noarch
+MySQL-server-5.6.29-1.linux_glibc2.5.x86_64
+php-ZendFramework-Db-Adapter-Mysqli-1.12.17-1.el7.centos7.noarch
+MySQL-devel-5.6.29-1.linux_glibc2.5.x86_64
+MySQL-shared-5.6.29-1.linux_glibc2.5.x86_64
+```
+2. 删除之前的mysql 组件
+
+```
+  rpm -e  MySQL-client-5.6.29-1.linux_glibc2.5.x86_64
+  rpm -e  MySQL-server-5.6.29-1.linux_glibc2.5.x86_64
+  rpm -e  MySQL-devel-5.6.29-1.linux_glibc2.5.x86_64
+  rpm -e  MySQL-shared-5.6.29-1.linux_glibc2.5.x86_64
+```
+3.  安装5.6.39
+```
+   1.解压安装包
+   2.  rpm -ivh rpm -ivh MySQL-server-5.6.39-1.el7.x86_64.rpm   
+       rpm  -ivh  rpm -ivh MySQL-devel-5.6.39-1.el7.x86_64.rpm
+      rpm -ivh  rpm -ivh MySQL-shared-5.6.39-1.el7.x86_64.rpm
+     rpm -ivh MySQL-client-5.6.39-1.el7.x86_64.rpm
+```
+4. 启动 mysql
+```
+   /etc/init.d/mysql start mysql 
+  或者
+  systemctl start mysql  （centos7）
+```
